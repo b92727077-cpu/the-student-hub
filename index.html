@@ -80,6 +80,34 @@
             margin-top: 40px;
             color: #6d6478;
         }
+        .student-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.student-info div {
+    background: #f3efff;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.student-info strong,
+.student-info span {
+    display: block;
+}
+
+.student-info strong {
+    color: #6a3de8;
+    margin-bottom: 6px;
+}
+
+.student-info span {
+    font-size: 18px;
+    font-weight: bold;
+}
     </style>
 </head>
 
@@ -92,10 +120,27 @@
 
     <main class="container">
 
-        <section class="welcome">
-            <h2>Welcome, Bakhtawar 👋</h2>
-            <p>Manage your studies, subjects and extra learning in one place.</p>
-        </section>
+       <section class="welcome">
+    <h2>Welcome, Bakhtawar 👋</h2>
+    <p>Your personal student dashboard.</p>
+
+    <div class="student-info">
+        <div>
+            <strong>Student</strong>
+            <span>Bakhtawar</span>
+        </div>
+
+        <div>
+            <strong>Class</strong>
+            <span>11th</span>
+        </div>
+
+        <div>
+            <strong>Subjects</strong>
+            <span>7</span>
+        </div>
+    </div>
+</section>
 
         <h2>My Subjects</h2>
 
