@@ -108,6 +108,32 @@
     font-size: 18px;
     font-weight: bold;
 }
+        .subject-button {
+    width: 100%;
+    border: none;
+    background: none;
+    color: #6a3de8;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.subject-options {
+    display: none;
+    margin-top: 15px;
+}
+
+.option-card {
+    background: #f3efff;
+    padding: 12px;
+    margin-top: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.option-card:hover {
+    background: #e5dcff;
+}
     </style>
 </head>
 
@@ -201,6 +227,16 @@
     <footer>
         <p>© 2026 The Student Hub — Bakhtawar</p>
     </footer>
+<script>
+function toggleOptions(id) {
+    const options = document.getElementById(id);
 
+    if (options.style.display === "block") {
+        options.style.display = "none";
+    } else {
+        options.style.display = "block";
+    }
+}
+</script>
 </body>
 </html>
