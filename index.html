@@ -134,119 +134,98 @@
 .option-card:hover {
     background: #e5dcff;
 }
+        #setup-screen {
+    background: white;
+    width: 90%;
+    max-width: 500px;
+    margin: 80px auto;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+#setup-screen h2 {
+    color: #6a3de8;
+    margin-bottom: 25px;
+}
+
+#setup-screen label {
+    display: block;
+    text-align: left;
+    margin-top: 15px;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+#setup-screen input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+#setup-screen button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    background: #7c4dff;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
     </style>
 </head>
 
 <body>
 
-    <header>
-        <h1>The Student Hub</h1>
-        <p>Your personal learning space</p>
-    </header>
+    <div id="welcome-screen">
+        <h1>Welcome to The Student Hub</h1>
 
-    <main class="container">
+        <p>Enter your name</p>
+        <input type="text" id="student-name" placeholder="Your name">
 
-       <section class="welcome">
-    <h2>Welcome, Bakhtawar 👋</h2>
-    <p>Your personal student dashboard.</p>
+        <p>Enter your class</p>
+        <input type="text" id="student-class" placeholder="Your class">
 
-    <div class="student-info">
-        <div>
-            <strong>Student</strong>
-            <span>Bakhtawar</span>
-        </div>
-
-        <div>
-            <strong>Class</strong>
-            <span>11th</span>
-        </div>
-
-        <div>
-            <strong>Subjects</strong>
-            <span>7</span>
-        </div>
+        <button onclick="startHub()">Enter Student Hub</button>
     </div>
-</section>
 
-        <h2>My Subjects</h2>
+    <div id="hub-screen" style="display: none;">
 
+        <header>
+            <h1>The Student Hub</h1>
+            <p id="welcome-message"></p>
+        </header>
 
+        <main class="container">
 
-        
+            <h2>My Subjects</h2>
 
-        <section class="subjects">
+            <!-- Yahan hum tumhare subjects ke cards rakhenge -->
 
-           <div class="subject">
-    <button class="subject-button" onclick="toggleOptions('english-options')">
-        English
-    </button>
+        </main>
 
-    <div id="english-options" class="subject-options">
-<a href="english-a.html" class="option-card">English A</a>
-        <div class="option-card">English B</div>
     </div>
-</div>
 
-           <div class="subject">
-    <button class="subject-button" onclick="toggleOptions('urdu-options')">
-        Urdu
-    </button>
+    <script>
+        function startHub() {
+            const name = document.getElementById("student-name").value;
+            const studentClass = document.getElementById("student-class").value;
 
-    <div id="urdu-options" class="subject-options">
-        <div class="option-card">Urdu A</div>
-        <div class="option-card">Urdu B</div>
-    </div>
-</div> 
-            
-            <div class="subject">
-                <h3>Mathematics</h3>
-                <p>Subject</p>
-            </div>
+            if (name === "" || studentClass === "") {
+                alert("Please enter your name and class.");
+                return;
+            }
 
-            <div class="subject">
-                <h3>Computer Science</h3>
-                <p>Subject</p>
-            </div>
+            document.getElementById("welcome-message").textContent =
+                "Welcome, " + name + "!";
 
-            <div class="subject">
-                <h3>Statistics</h3>
-                <p>Subject</p>
-            </div>
+            document.getElementById("welcome-screen").style.display = "none";
+            document.getElementById("hub-screen").style.display = "block";
+        }
+    </script>
 
-            <div class="subject">
-                <h3>Tarjuma-tul-Quran</h3>
-                <p>Subject</p>
-            </div>
-
-            <div class="subject">
-                <h3>Islamiat</h3>
-                <p>Subject</p>
-            </div>
-
-        </section>
-
-        <section class="learning">
-            <h2>🧠 My Extra Learning</h2>
-            <p>
-                Save and track the topics you are learning outside your school subjects.
-            </p>
-        </section>
-
-    </main>
-
-    <footer>
-        <p>© 2026 The Student Hub — Bakhtawar</p>
-    </footer>
-<script>
-function toggleOptions(id) {
-    const options = document.getElementById(id);
-
-    if (options.style.display === "block") {
-        options.style.display = "none";
-    } else {
-        options.style.display = "block";
-    }
-}
-</script>
 </body>
 </html>
