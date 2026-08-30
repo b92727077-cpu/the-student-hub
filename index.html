@@ -43,19 +43,27 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
 
-        .subjects {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-        }
+       .subjects {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 25px;
+}
 
         .subject {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.07);
-        }
+    background: #FFFFFF;
+    padding: 22px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(80, 60, 70, 0.08);
+    transition: 0.2s ease;
+}
+
+.subject:hover {
+    background: #F3E9EE;
+    box-shadow: 0 8px 20px rgba(80, 60, 70, 0.16);
+    transform: translateY(-3px);
+}
 
         .subject h3 {
             color: #6F5665;
