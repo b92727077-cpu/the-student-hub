@@ -256,7 +256,55 @@
 
             <h2>My Subjects</h2>
 
-            <!-- Yahan hum tumhare subjects ke cards rakhenge -->
+            <section class="subjects">
+
+    <div class="subject">
+        <button class="subject-button" onclick="toggleOptions('english-options')">
+            English
+        </button>
+
+        <div id="english-options" class="subject-options">
+            <a href="english-a.html" class="option-card">English A</a>
+            <div class="option-card">English B</div>
+        </div>
+    </div>
+
+    <div class="subject">
+        <button class="subject-button" onclick="toggleOptions('urdu-options')">
+            Urdu
+        </button>
+
+        <div id="urdu-options" class="subject-options">
+            <div class="option-card">Urdu A</div>
+            <div class="option-card">Urdu B</div>
+        </div>
+    </div>
+
+    <div class="subject">
+        <h3>Mathematics</h3>
+    </div>
+
+    <div class="subject">
+        <h3>Computer Science</h3>
+    </div>
+
+    <div class="subject">
+        <h3>Statistics</h3>
+    </div>
+
+    <div class="subject">
+        <h3>Physics</h3>
+    </div>
+
+    <div class="subject">
+        <h3>Tarjuma-tul-Quran</h3>
+    </div>
+
+    <div class="subject">
+        <h3>Islamiat</h3>
+    </div>
+
+</section>
 
         </main>
 
@@ -278,6 +326,15 @@
             document.getElementById("welcome-screen").style.display = "none";
             document.getElementById("hub-screen").style.display = "block";
         }
+        function toggleOptions(id) {
+    const options = document.getElementById(id);
+
+    if (options.style.display === "block") {
+        options.style.display = "none";
+    } else {
+        options.style.display = "block";
+    }
+}
     </script>
 
 </body>
