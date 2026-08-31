@@ -59,10 +59,15 @@
     transition: 0.2s ease;
 }
 
-.subject:hover {
+.subject:not(a):hover {
     background: #F3E9EE;
     box-shadow: 0 8px 20px rgba(80, 60, 70, 0.16);
     transform: translateY(-3px);
+}
+
+a.subject {
+    text-decoration: none;
+    color: inherit;
 }
 
         .subject h3 {
