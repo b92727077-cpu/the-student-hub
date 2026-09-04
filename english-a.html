@@ -3,68 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English A - The Student Hub</title>
+    <title>English - The Student Hub</title>
 
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
         body {
             font-family: Arial, sans-serif;
-            background: #f7f4ff;
-            color: #2d2340;
+            background: #F6F1F4;
+            color: #3F3540;
+            margin: 0;
         }
 
         header {
-            background: #7c4dff;
+            background: #927487;
             color: white;
-            padding: 25px;
             text-align: center;
+            padding: 25px;
         }
 
         .container {
             width: 90%;
-            max-width: 1100px;
-            margin: 30px auto;
+            max-width: 700px;
+            margin: 50px auto;
         }
 
-        .back {
-            display: inline-block;
-            margin-bottom: 25px;
-            color: #6a3de8;
+        .option {
+            display: block;
+            background: white;
+            color: #6F5665;
             text-decoration: none;
-            font-weight: bold;
-        }
-
-       .chapter {
-    display: block;
-    background: white;
-    padding: 20px;
-    margin-top: 15px;
-    border-radius: 12px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.07);
-    text-decoration: none;
-    color: inherit;
-    transition: 0.2s;
-}
-
-.chapter:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 14px rgba(0,0,0,0.12);
-}}
-
-        .chapter h3 {
-            color: #6a3de8;
-        }
-
-        footer {
             text-align: center;
             padding: 25px;
-            margin-top: 40px;
-            color: #6d6478;
+            margin: 20px 0;
+            border-radius: 14px;
+            font-size: 22px;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(80, 60, 70, 0.08);
+        }
+
+        .option:hover {
+            background: #F3E9EE;
+            box-shadow: 0 8px 20px rgba(80, 60, 70, 0.16);
+            transform: translateY(-3px);
         }
     </style>
 </head>
@@ -72,32 +51,21 @@
 <body>
 
     <header>
-        <h1>English A</h1>
+        <h1>English</h1>
         <p>The Student Hub</p>
     </header>
 
     <main class="container">
 
-        <a href="index.html" class="back">← Back to Student Hub</a>
+        <a href="english-a.html" class="option">
+            English A
+        </a>
 
-        <h2>📖 Chapters</h2>
-
-       <a href="chapter-1.html" class="chapter">
-    <h3>Chapter 1</h3>
-</a>
-        <div class="chapter">
-            <h3>Chapter 2</h3>
-        </div>
-
-        <div class="chapter">
-            <h3>Chapter 3</h3>
-        </div>
+        <a href="english-b.html" class="option">
+            English B
+        </a>
 
     </main>
-
-    <footer>
-        <p>© 2026 The Student Hub — Bakhtawar</p>
-    </footer>
 
 </body>
 </html>
