@@ -300,10 +300,10 @@ a.subject {
     </div>
 
     <script>
-        function startHub(event) {
+       function startHub(event) {
     event.preventDefault();
 
-    const name = document.getElementById("student-name").value;
+    const name = document.getElementById("student-name").value.trim();
 
     if (name === "") {
         alert("Please enter your name.");
@@ -315,30 +315,6 @@ a.subject {
 
     document.getElementById("welcome-screen").style.display = "none";
     document.getElementById("hub-screen").style.display = "block";
-}
-        function startHub() {
-            const name = document.getElementById("student-name").value;
-           
-
-            if (name === "") {
-                alert("Please enter your name.");
-                return;
-            }
-
-         document.getElementById("welcome-message").textContent =
-    "Welcome, " + name + " 👋!";
-
-            document.getElementById("welcome-screen").style.display = "none";
-            document.getElementById("hub-screen").style.display = "block";
-        }
-        function toggleOptions(id) {
-    const options = document.getElementById(id);
-
-    if (options.style.display === "block") {
-        options.style.display = "none";
-    } else {
-        options.style.display = "block";
-    }
 }
     </script>
 
