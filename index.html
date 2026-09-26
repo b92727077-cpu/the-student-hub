@@ -300,7 +300,7 @@ a.subject {
     </div>
 
     <script>
-       function startHub(event) {
+      function startHub(event) {
     event.preventDefault();
 
     const name = document.getElementById("student-name").value.trim();
@@ -310,11 +310,9 @@ a.subject {
         return;
     }
 
-    document.getElementById("welcome-message").textContent =
-        "Welcome, " + name + " 👋!";
+    localStorage.setItem("studentName", name);
 
-    document.getElementById("welcome-screen").style.display = "none";
-    document.getElementById("hub-screen").style.display = "block";
+    window.location.href = "dashboard.html";
 }
     </script>
 
