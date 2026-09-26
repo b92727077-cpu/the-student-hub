@@ -243,18 +243,14 @@ a.subject {
 
 <body>
 
-<div id="welcome-screen">
-
+<form id="welcome-screen" onsubmit="startHub(event)">
     <h1>Welcome to The Student Hub</h1>
 
     <p>Your name</p>
-    <input type="text" id="student-name" placeholder="Enter your good name">
+<input type="text" id="student-name" placeholder="Enter your good name" autofocus>
 
- 
-
-    <button onclick="startHub()">Start Journey</button>
-
-</div>
+<button type="submit">Start Journey</button>
+</form>
       
     <div id="hub-screen" style="display: none;">
 
@@ -304,6 +300,22 @@ a.subject {
     </div>
 
     <script>
+        function startHub(event) {
+    event.preventDefault();
+
+    const name = document.getElementById("student-name").value;
+
+    if (name === "") {
+        alert("Please enter your name.");
+        return;
+    }
+
+    document.getElementById("welcome-message").textContent =
+        "Welcome, " + name + " 👋!";
+
+    document.getElementById("welcome-screen").style.display = "none";
+    document.getElementById("hub-screen").style.display = "block";
+}
         function startHub() {
             const name = document.getElementById("student-name").value;
            
