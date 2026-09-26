@@ -108,7 +108,14 @@
         }
     </style>
 </head>
+<script>
+    const name = localStorage.getItem("studentName");
 
+    if (name) {
+        document.getElementById("welcome-message").textContent =
+            "Welcome, " + name + " 👋!";
+    }
+</script>
 <body>
 
     <header>
@@ -119,7 +126,7 @@
     <main class="container">
 
         <section class="welcome-message">
-            <h2 id="welcome-message">Welcome, Bakhtawar 👋!</h2>
+            <h2 id="welcome-message"></h2>
         </section>
 
         <h2>My Subjects</h2>
