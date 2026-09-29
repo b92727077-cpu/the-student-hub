@@ -299,22 +299,25 @@ a.subject {
 
     </div>
 
-    <script>
-      function startHub(event) {
-    event.preventDefault();
+<script>
+    function startHub(event) {
+        event.preventDefault();
 
-    const name = document.getElementById("student-name").value.trim();
+        const name = document.getElementById("student-name").value.trim();
 
-    if (name === "") {
-        alert("Please enter your name.");
-        return;
+        if (name === "") {
+            alert("Please enter your name.");
+            return;
+        }
+
+        localStorage.setItem("studentName", name);
+
+        window.location.href = "dashboard.html";
     }
 
-    localStorage.setItem("studentName", name);
+    const savedName = localStorage.getItem("studentName");
 
-    window.location.href = "dashboard.html";
-}
-    </script>
-
-</body>
-</html>
+    if (savedName) {
+        window.location.href = "dashboard.html";
+    }
+</script>
