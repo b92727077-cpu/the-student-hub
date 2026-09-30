@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color: #f4f6f9;
+    background-color: #f0f2f5;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,17 +14,19 @@ body {
     padding: 20px;
 }
 
+/* مرکزی کنٹینر */
 .container {
     background: #ffffff;
     width: 100%;
-    max-width: 500px;
+    max-width: 520px;
     padding: 25px;
     border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
     text-align: center;
+    margin: auto;
 }
 
-/* Top Navigation */
+/* ٹاپ نیویگیشن */
 .top-nav {
     display: flex;
     align-items: center;
@@ -45,14 +47,14 @@ body {
 
 #chapter-title {
     font-size: 1.1rem;
-    color: #333;
+    color: #2c3e50;
 }
 
-/* Visual Progress Bar */
+/* پروگریس بار */
 .progress-container {
     width: 100%;
     height: 8px;
-    background-color: #e0e0e0;
+    background-color: #e9ecef;
     border-radius: 10px;
     overflow: hidden;
     margin-bottom: 12px;
@@ -67,13 +69,15 @@ body {
 
 .counter-text {
     font-size: 0.85rem;
-    color: #666;
+    color: #6c757d;
     margin-bottom: 20px;
 }
 
-/* 3D Flashcard Animation */
+/* 3D فلیش کارڈ سیٹنگ */
 .flashcard-container {
     perspective: 1000px;
+    width: 100%;
+    height: 250px;
     margin-bottom: 25px;
     cursor: pointer;
 }
@@ -81,13 +85,14 @@ body {
 .flashcard {
     position: relative;
     width: 100%;
-    height: 240px;
+    height: 100%;
     transform-style: preserve-3d;
     transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
     border-radius: 12px;
 }
 
-.flashcard.flipped {
+/* فلپ اینیمیشن کلاس */
+.flashcard.is-flipped {
     transform: rotateY(180deg);
 }
 
@@ -102,39 +107,42 @@ body {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    border: 1px solid #eef0f3;
+    border: 2px solid #e2e8f0;
+    background-color: #ffffff; /* خالص سفید رنگ */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-..card-front {
-    background-color: #ffffff; /* White */
-    color: #333;
+.card-front {
+    background-color: #ffffff;
+    color: #2d3748;
 }
 
 .card-back {
-    background-color: #ffffff; /* Isay bhi Pure White kar diya hai */
-    color: #2c3e50;
+    background-color: #ffffff; /* بیک سائیڈ بھی خالص سفید */
+    color: #1a202c;
     transform: rotateY(180deg);
 }
+
 .card-label {
     font-size: 0.75rem;
     letter-spacing: 1.5px;
     font-weight: 700;
-    color: #888;
+    color: #a0aec0;
 }
 
 #card-question, #card-answer {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     line-height: 1.5;
+    font-weight: 600;
     margin: auto 0;
 }
 
 .click-hint {
     font-size: 0.8rem;
-    color: #aaa;
+    color: #cbd5e0;
 }
 
-/* Controls & Buttons */
+/* کنٹرول بٹنز */
 .controls {
     display: flex;
     justify-content: space-between;
@@ -158,19 +166,15 @@ body {
     background-color: #357abd;
 }
 
-.btn:active {
-    transform: scale(0.98);
-}
-
 .btn:disabled {
-    background-color: #ccc;
+    background-color: #cbd5e0;
     cursor: not-allowed;
 }
 
 .btn-shuffle {
-    background-color: #f39c12;
+    background-color: #ed8936;
 }
 
 .btn-shuffle:hover {
-    background-color: #d68910;
+    background-color: #dd6b20;
 }
