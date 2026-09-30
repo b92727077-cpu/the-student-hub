@@ -1,1 +1,123 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter - The Student Hub</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #F6F1F4;
+            color: #3F3540;
+            min-height: 100vh;
+        }
+
+        header {
+            background: #927487;
+            color: white;
+            text-align: center;
+            padding: 28px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 50px auto;
+        }
+
+        .back {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: #6F5665;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .chapter-title {
+            text-align: center;
+            color: #6F5665;
+            margin-bottom: 35px;
+        }
+
+        .practice-card {
+            display: block;
+            background: #FFFFFF;
+            color: #6F5665;
+            text-decoration: none;
+            text-align: center;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 3px 10px rgba(80, 60, 70, 0.08);
+            transition: 0.2s ease;
+        }
+
+        .practice-card:hover {
+            background: #F3E9EE;
+            box-shadow: 0 8px 20px rgba(80, 60, 70, 0.16);
+            transform: translateY(-3px);
+        }
+
+        .practice-card h2 {
+            margin-bottom: 10px;
+        }
+
+        .practice-card p {
+            color: #3F3540;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Computer Science</h1>
+        <p>The Student Hub</p>
+    </header>
+
+    <main class="container">
+
+        <a href="computer.html" class="back">
+            ← Back to Computer Science
+        </a>
+
+        <section class="chapter-title">
+            <h2 id="chapter-title">Chapter</h2>
+        </section>
+
+        <a id="practice-link" href="#" class="practice-card">
+            <h2>Practice</h2>
+            <p>Open Flashcards and start practicing.</p>
+        </a>
+
+    </main>
+
+    <script src="flashcards.js"></script>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const chapterNumber = params.get("chapter");
+
+        const chapter = chapterData[chapterNumber];
+
+        if (chapter) {
+            document.getElementById("chapter-title").textContent =
+                chapterNumber + "_ " + chapter.title;
+
+            document.getElementById("practice-link").href =
+                "flashcards.html?chapter=" + chapterNumber;
+        } else {
+            document.getElementById("chapter-title").textContent =
+                "Chapter not found";
+        }
+    </script>
+
+</body>
+</html>
