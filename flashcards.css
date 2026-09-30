@@ -1,181 +1,162 @@
-/* Reset & Base */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+:root {
+    --bg-color: #F6F1F4;
+    --main-mauve: #927487;
+    --dark-mauve-text: #6F5665;
+    --main-dark-text: #3F3540;
+    --soft-mauve-tint: #F3E9EE;
+    --cream-accent: #F7F1E8;
+    --white: #FFFFFF;
 }
 
 body {
-    background-color: #f4effc; /* Aap ka light purple background */
-    color: #333;
-    padding: 30px 20px;
+    background-color: var(--bg-color);
+    color: var(--main-dark-text);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
 }
 
-/* Full Page Container */
-.container {
-    max-width: 800px; /* Bada aur khula layout */
-    margin: 0 auto;
+.hub-container {
+    max-width: 650px;
+    width: 100%;
 }
 
-/* Header & Title */
-.top-nav {
-    margin-bottom: 25px;
-    border-bottom: 2px solid #e0d4f5;
-    padding-bottom: 15px;
+.chapter-header {
+    margin-bottom: 24px;
 }
 
 .back-link {
-    color: #6b4ce6;
+    color: var(--dark-mauve-text);
     text-decoration: none;
-    font-weight: 700;
-    font-size: 1.1rem;
+    font-weight: bold;
     display: inline-block;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .back-link:hover {
     text-decoration: underline;
 }
 
-#chapter-title {
-    font-size: 1.8rem;
-    color: #4a2a96; /* Dark purple for title */
+h1 {
+    color: var(--main-dark-text);
+    margin: 0 0 8px 0;
+    font-size: 1.6rem;
 }
 
-/* Progress Bar */
-.progress-container {
+.card-counter {
+    color: var(--dark-mauve-text);
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+/* 3D Card Container */
+.scene {
     width: 100%;
-    height: 10px;
-    background-color: #e5d9f2;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    overflow: hidden;
-}
-
-.progress-bar {
-    height: 100%;
-    background-color: #6b4ce6;
-    border-radius: 10px;
-    transition: width 0.3s ease;
-}
-
-.counter-text {
-    font-size: 1rem;
-    color: #6b4ce6;
-    font-weight: 600;
-    margin-bottom: 25px;
-}
-
-/* 3D Flashcard Design */
-.flashcard-container {
+    height: 320px;
     perspective: 1000px;
+    margin-bottom: 24px;
+}
+
+/* 3D Card Element */
+.card {
     width: 100%;
-    height: 350px; /* Bada card */
-    margin-bottom: 30px;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
     cursor: pointer;
 }
 
-.flashcard {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
-}
-
-.flashcard.is-flipped {
+.card.is-flipped {
     transform: rotateY(180deg);
 }
 
+/* Front & Back Faces */
 .card-face {
     position: absolute;
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
     border-radius: 16px;
-    padding: 40px;
+    padding: 28px;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    background-color: #ffffff; /* Pure White */
-    border: 2px solid #e0d4f5;
-    box-shadow: 0 10px 25px rgba(107, 76, 230, 0.1);
-    text-align: center;
+    box-shadow: 0 10px 25px rgba(80, 60, 70, 0.08);
+    border: 1px solid rgba(146, 116, 135, 0.15);
+}
+
+.card-front {
+    background-color: var(--cream-accent);
+    color: var(--main-dark-text);
 }
 
 .card-back {
+    background-color: var(--soft-mauve-tint);
+    color: var(--main-dark-text);
     transform: rotateY(180deg);
 }
 
-.card-label {
-    position: absolute;
-    top: 25px;
-    left: 25px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: #9c88d9;
-    letter-spacing: 1px;
+.card-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    text-align: center;
 }
 
-.click-hint {
-    position: absolute;
-    bottom: 25px;
-    font-size: 0.85rem;
-    color: #9c88d9;
+.card-content p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin: 0;
 }
 
-#card-question {
-    font-size: 1.6rem;
-    font-weight: 600;
-    color: #2d1b5e;
+.flip-btn {
+    background-color: var(--main-mauve);
+    color: var(--white);
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
-#card-answer {
-    font-size: 1.3rem;
-    line-height: 1.6;
-    color: #3a2b6b;
+.flip-btn:hover {
+    background-color: var(--dark-mauve-text);
 }
 
-/* Buttons */
+/* Controls */
 .controls {
     display: flex;
     justify-content: space-between;
-    gap: 15px;
+    gap: 16px;
 }
 
-.btn {
+.controls button {
     flex: 1;
-    padding: 15px;
-    border: none;
+    padding: 12px;
+    background-color: var(--white);
+    color: var(--dark-mauve-text);
+    border: 1px solid var(--main-mauve);
     border-radius: 10px;
-    background-color: #6b4ce6;
-    color: white;
+    font-size: 1rem;
     font-weight: bold;
-    font-size: 1.05rem;
     cursor: pointer;
-    transition: background-color 0.2s, transform 0.1s;
+    transition: all 0.2s ease;
 }
 
-.btn:hover {
-    background-color: #553bb8;
+.controls button:hover:not(:disabled) {
+    background-color: var(--soft-mauve-tint);
+    transform: translateY(-1px);
 }
 
-.btn:active {
-    transform: scale(0.98);
-}
-
-.btn:disabled {
-    background-color: #c9bcf2;
+.controls button:disabled {
+    opacity: 0.4;
     cursor: not-allowed;
-    transform: none;
-}
-
-.btn-shuffle {
-    background-color: #9c88d9;
-}
-
-.btn-shuffle:hover {
-    background-color: #7b65c2;
+    border-color: #ccc;
 }
