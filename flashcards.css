@@ -1,0 +1,162 @@
+:root {
+    --bg-color: #F6F1F4;
+    --main-mauve: #927487;
+    --dark-mauve-text: #6F5665;
+    --main-dark-text: #3F3540;
+    --soft-mauve-tint: #F3E9EE;
+    --cream-accent: #F7F1E8;
+    --white: #FFFFFF;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--main-dark-text);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.hub-container {
+    max-width: 650px;
+    width: 100%;
+}
+
+.chapter-header {
+    margin-bottom: 24px;
+}
+
+.back-link {
+    color: var(--dark-mauve-text);
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 12px;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+h1 {
+    color: var(--main-dark-text);
+    margin: 0 0 8px 0;
+    font-size: 1.6rem;
+}
+
+.card-counter {
+    color: var(--dark-mauve-text);
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+/* 3D Card Container */
+.scene {
+    width: 100%;
+    height: 320px;
+    perspective: 1000px;
+    margin-bottom: 24px;
+}
+
+/* 3D Card Element */
+.card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+    cursor: pointer;
+}
+
+.card.is-flipped {
+    transform: rotateY(180deg);
+}
+
+/* Front & Back Faces */
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 16px;
+    padding: 28px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 10px 25px rgba(80, 60, 70, 0.08);
+    border: 1px solid rgba(146, 116, 135, 0.15);
+}
+
+.card-front {
+    background-color: var(--cream-accent);
+    color: var(--main-dark-text);
+}
+
+.card-back {
+    background-color: var(--soft-mauve-tint);
+    color: var(--main-dark-text);
+    transform: rotateY(180deg);
+}
+
+.card-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.card-content p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.flip-btn {
+    background-color: var(--main-mauve);
+    color: var(--white);
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.flip-btn:hover {
+    background-color: var(--dark-mauve-text);
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.controls button {
+    flex: 1;
+    padding: 12px;
+    background-color: var(--white);
+    color: var(--dark-mauve-text);
+    border: 1px solid var(--main-mauve);
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.controls button:hover:not(:disabled) {
+    background-color: var(--soft-mauve-tint);
+    transform: translateY(-1px);
+}
+
+.controls button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    border-color: #ccc;
+}
