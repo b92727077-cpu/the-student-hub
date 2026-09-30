@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards - The Student Hub</title>
+    <link rel="stylesheet" href="flashcards.css">
+</head>
+<body>
+
+    <div class="hub-container">
+        <!-- Back Link & Header -->
+        <header class="chapter-header">
+            <a id="back-to-chapter" href="computer.html" class="back-link">← Back to Chapter</a>
+            <h1 id="chapter-title">Loading Flashcards...</h1>
+            <p id="card-counter" class="card-counter">Card 0 of 0</p>
+        </header>
+
+        <!-- 3D Flashcard Section -->
+        <main class="flashcard-section">
+            <div class="scene">
+                <div class="card" id="flashcard" onclick="flipCard()">
+                    <div class="card-face card-front">
+                        <div class="card-content">
+                            <p id="card-question">Loading question...</p>
+                        </div>
+                        <button class="flip-btn" type="button">Flip</button>
+                    </div>
+                    <div class="card-face card-back">
+                        <div class="card-content">
+                            <p id="card-answer">Loading answer...</p>
+                        </div>
+                        <button class="flip-btn" type="button">Flip</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Previous / Next Controls -->
+            <div class="controls">
+                <button id="prev-btn" onclick="prevCard()">Previous</button>
+                <button id="next-btn" onclick="nextCard()">Next</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Data Pehle Load Hoga -->
+    <script src="flashcards.js"></script>
+</body>
+</html>
