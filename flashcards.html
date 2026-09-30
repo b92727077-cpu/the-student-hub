@@ -3,47 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flashcards - The Student Hub</title>
+    <title>Flashcards Practice</title>
     <link rel="stylesheet" href="flashcards.css">
 </head>
 <body>
 
-    <div class="hub-container">
-        <!-- Back Link & Header -->
-        <header class="chapter-header">
-            <a id="back-to-chapter" href="computer.html" class="back-link">← Back to Chapter</a>
-            <h1 id="chapter-title">Loading Flashcards...</h1>
-            <p id="card-counter" class="card-counter">Card 0 of 0</p>
-        </header>
+    <div class="container">
+        <!-- Top Navigation -->
+        <div class="top-nav">
+            <a id="back-to-chapter" href="#" class="back-link">← Back to Chapter</a>
+            <h2 id="chapter-title">Loading...</h2>
+        </div>
 
-        <!-- 3D Flashcard Section -->
-        <main class="flashcard-section">
-            <div class="scene">
-                <div class="card" id="flashcard" onclick="flipCard()">
-                    <div class="card-face card-front">
-                        <div class="card-content">
-                            <p id="card-question">Loading question...</p>
-                        </div>
-                        <button class="flip-btn" type="button">Flip</button>
-                    </div>
-                    <div class="card-face card-back">
-                        <div class="card-content">
-                            <p id="card-answer">Loading answer...</p>
-                        </div>
-                        <button class="flip-btn" type="button">Flip</button>
-                    </div>
+        <!-- Visual Progress Bar -->
+        <div class="progress-container">
+            <div id="progress-bar" class="progress-bar"></div>
+        </div>
+
+        <!-- Card Counter -->
+        <div class="counter-text" id="card-counter">Card 1 of --</div>
+
+        <!-- 3D Flashcard -->
+        <div class="flashcard-container" onclick="flipCard()">
+            <div class="flashcard" id="flashcard">
+                <div class="card-face card-front">
+                    <p class="card-label">QUESTION</p>
+                    <h3 id="card-question">Loading Question...</h3>
+                    <span class="click-hint">Click or Space to flip ↺</span>
+                </div>
+                <div class="card-face card-back">
+                    <p class="card-label">ANSWER</p>
+                    <p id="card-answer">Loading Answer...</p>
                 </div>
             </div>
+        </div>
 
-            <!-- Previous / Next Controls -->
-            <div class="controls">
-                <button id="prev-btn" onclick="prevCard()">Previous</button>
-                <button id="next-btn" onclick="nextCard()">Next</button>
-            </div>
-        </main>
+        <!-- Control Buttons -->
+        <div class="controls">
+            <button id="prev-btn" class="btn" onclick="prevCard()">Previous</button>
+            <button class="btn btn-shuffle" onclick="shuffleCards()">🔀 Shuffle</button>
+            <button id="next-btn" class="btn" onclick="nextCard()">Next</button>
+        </div>
     </div>
 
-    <!-- Data Pehle Load Hoga -->
     <script src="flashcards.js"></script>
 </body>
 </html>
