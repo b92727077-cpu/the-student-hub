@@ -120,7 +120,7 @@ body {
     background: #FFFFFF;
     color: #6F5665;
     box-shadow: 0 3px 10px rgba(80, 60, 70, 0.08);
-    transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    transition: background 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card-front {
@@ -135,11 +135,6 @@ body {
 .flashcard-container:hover .card-face {
     background: #F3E9EE;
     box-shadow: 0 8px 20px rgba(80, 60, 70, 0.16);
-}
-}
-
-.card-back {
-    transform: rotateY(180deg);
 }
 
 .card-label {
@@ -170,7 +165,7 @@ body {
     opacity: 0.75;
 }
 
-/* Control Buttons & Hover */
+/* Control Buttons & Hover/Click Effect */
 .controls {
     display: flex;
     gap: 12px;
@@ -187,15 +182,21 @@ body {
     cursor: pointer;
     background-color: var(--main-mauve);
     color: var(--white);
-    box-shadow: var(--shadow-soft);
-    transition: all 0.2s ease;
+    box-shadow: 0 3px 10px rgba(80, 60, 70, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
-/* Buttons Hover */
+/* Buttons Hover (Lift Effect) */
 .btn:hover {
     background-color: var(--dark-mauve-text);
-    box-shadow: var(--shadow-hover);
-    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(80, 60, 70, 0.2);
+    transform: translateY(-3px);
+}
+
+/* Button Click Press Effect */
+.btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 5px rgba(80, 60, 70, 0.15);
 }
 
 .btn-shuffle {
