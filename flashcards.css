@@ -131,10 +131,21 @@ body {
     transform: rotateY(180deg);
 }
 
-/* --- EXACT HOVER MATCHING YOUR SUBJECT & PRACTICE CARDS --- */
+/* --- EXACT PRACTICE CARD LIFT-UP HOVER EFFECT --- */
 .flashcard-container:hover .card-face {
     background: #F3E9EE;
     box-shadow: 0 8px 20px rgba(80, 60, 70, 0.16);
+    transform: translateY(-3px); /* Cards ab practice card ki tarah upar uthenge */
+}
+
+/* Card flip hone par lift effect barkaraar rakhne ke liye */
+.flashcard.is-flipped .card-back {
+    transform: rotateY(180deg);
+}
+
+.flashcard-container:hover .flashcard.is-flipped .card-back {
+    transform: rotateY(180deg) translateY(-3px);
+};
 }
 
 .card-label {
