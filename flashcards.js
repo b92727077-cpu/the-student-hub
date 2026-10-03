@@ -402,87 +402,100 @@ const chapterData = {
     }
 };
 
-// Application State
-let currentChapterId = "1";
+const urlParams = new URLSearchParams(window.location.search);
+const currentChapter = urlParams.get('chapter') || "1";
+
+// State
 let currentCardIndex = 0;
+let cards = chapterData[currentChapter]?.cards || [];
 
-// Initialize on DOM Ready
-document.addEventListener("DOMContentLoaded", () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const paramChapter = urlParams.get("chapter");
+// DOM Elements
+const flashcard = document.getElementById('flashcard');
+const questionEl = document.getElementById('card-question');
+const answerEl = document.getElementById('card-answer');
+const counterEl = document.getElementById('card-counter');
+const chapterTitleEl = document.getElementById('chapter-title');
+const progressBar = document.getElementById('progress-bar');
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
 
-    if (paramChapter && chapterData[paramChapter]) {
-        currentChapterId = paramChapter;
+// Initial Setup
+function initPage() {
+    if (chapterData[currentChapter]) {
+        chapterTitleEl.innerText = chapterData[currentChapter].title;
+    } else {
+        chapterTitleEl.innerText = "Chapter Not Found";
     }
+    showCard(currentCardIndex);
+}
 
-    const backBtn = document.getElementById("back-to-chapter");
-    if (backBtn) {
-        backBtn.href = "chapter.html?chapter=" + currentChapterId;
-    }
-
-    loadChapter(currentChapterId);
-});
-
-// Load Chapter Data
-function loadChapter(chapterId) {
-    const titleElem = document.getElementById("chapter-title");
-    
-    if (!chapterData[chapterId]) {
-        if (titleElem) titleElem.innerText = "Chapter Not Found";
+// Display Card
+function showCard(index) {
+    if (!cards || cards.length === 0) {
+        questionEl.innerText = "No cards available.";
+        answerEl.innerText = "No cards available.";
+        counterEl.innerText = "Card 0 of 0";
         return;
     }
 
-    const chapter = chapterData[chapterId];
-    if (titleElem) {
-        titleElem.innerText = chapterId + "_ " + chapter.title;
-    }
+    // Reset flip state on navigation
+    flashcard.classList.remove('is-flipped');
 
-    currentCardIndex = 0;
-    renderCard();
+    setTimeout(() => {
+        questionEl.innerText = cards[index].question;
+        answerEl.innerText = cards[index].answer;
+        counterEl.innerText = `Card ${index + 1} of ${cards.length}`;
+
+        // Progress percentage
+        const progress = ((index + 1) / cards.length) * 100;
+        progressBar.style.width = `${progress}%`;
+
+        // Controls state
+        prevBtn.disabled = index === 0;
+        nextBtn.disabled = index === cards.length - 1;
+    }, 120);
 }
 
-// Render Card and Update UI Counter
-function renderCard() {
-    const chapter = chapterData[currentChapterId];
-    if (!chapter || !chapter.cards || chapter.cards.length === 0) return;
-
-    const card = chapter.cards[currentCardIndex];
-    const totalCards = chapter.cards.length;
-
-    const flashcard = document.getElementById("flashcard");
-    if (flashcard) {
-        flashcard.classList.remove("is-flipped");
-    }
-
-    document.getElementById("card-question").innerText = card.question;
-    document.getElementById("card-answer").innerText = card.answer;
-    document.getElementById("card-counter").innerText = `Card ${currentCardIndex + 1} of ${totalCards}`;
-
-    document.getElementById("prev-btn").disabled = (currentCardIndex === 0);
-    document.getElementById("next-btn").disabled = (currentCardIndex === totalCards - 1);
-}
-
-// Toggle 3D Flip Animation
+// Flip Card Logic
 function flipCard() {
-    const flashcard = document.getElementById("flashcard");
-    if (flashcard) {
-        flashcard.classList.toggle("is-flipped");
-    }
+    flashcard.classList.toggle('is-flipped');
 }
 
-// Next Card Navigation
+// Controls
 function nextCard() {
-    const chapter = chapterData[currentChapterId];
-    if (currentCardIndex < chapter.cards.length - 1) {
+    if (currentCardIndex < cards.length - 1) {
         currentCardIndex++;
-        renderCard();
+        showCard(currentCardIndex);
     }
 }
 
-// Previous Card Navigation
 function prevCard() {
     if (currentCardIndex > 0) {
         currentCardIndex--;
-        renderCard();
+        showCard(currentCardIndex);
     }
 }
+
+function shuffleCards() {
+    for (let i = cards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [cards[i], cards[j]] = [cards[j], cards[i]];
+    }
+    currentCardIndex = 0;
+    showCard(currentCardIndex);
+}
+
+// Keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+    if (e.code === 'Space') {
+        e.preventDefault();
+        flipCard();
+    } else if (e.code === 'ArrowRight') {
+        nextCard();
+    } else if (e.code === 'ArrowLeft') {
+        prevCard();
+    }
+});
+
+// Run
+document.addEventListener('DOMContentLoaded', initPage);
