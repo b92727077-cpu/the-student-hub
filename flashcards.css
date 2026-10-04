@@ -69,12 +69,21 @@ body {
 /* 3D CARD */
 
 .flashcard-container {
-    width: 100%;
+    width: 75%;
+    max-width: 700px;
     height: 400px;
     perspective: 1200px;
-    margin-bottom: 30px;
+    margin: 20px auto 30px;
+}
+.flashcard-container:hover .card-front {
+    background: #F3E9EE;
+    box-shadow: 0 10px 25px rgba(80, 60, 70, 0.16);
 }
 
+.flashcard-container:hover .card-back {
+    background: #E8D9DE;
+    box-shadow: 0 10px 25px rgba(80, 60, 70, 0.16);
+}
 .flashcard {
     position: relative;
     width: 100%;
@@ -167,8 +176,21 @@ body {
     transition: 0.2s ease;
 }
 
+.btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    background: #927487;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
 .btn:hover {
     background: #6F5665;
+    box-shadow: 0 6px 16px rgba(80, 60, 70, 0.16);
+    transform: translateY(-2px);
 }
 
 .btn:disabled {
@@ -177,10 +199,12 @@ body {
 }
 
 @media (max-width: 650px) {
-    .top-nav {
-        flex-direction: column;
-        align-items: flex-start;
+
+    .flashcard-container {
+        width: 100%;
+        height: 360px;
     }
+
 
     #chapter-title {
         text-align: left;
