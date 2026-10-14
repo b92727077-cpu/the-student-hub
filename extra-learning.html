@@ -1,1 +1,288 @@
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Extra Learning - The Student Hub</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #F6F1F4;
+            color: #3F3540;
+        }
+
+        header {
+            background: #927487;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 850px;
+            margin: 35px auto;
+        }
+
+        .back {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #6F5665;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .panel,
+        .topic-card {
+            background: white;
+            padding: 22px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(80, 60, 70, 0.08);
+        }
+
+        label {
+            display: block;
+            margin: 14px 0 6px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #CDBBC5;
+            border-radius: 8px;
+            font: inherit;
+        }
+
+        button {
+            border: 0;
+            border-radius: 8px;
+            padding: 11px 16px;
+            margin: 12px 6px 0 0;
+            background: #927487;
+            color: white;
+            font: inherit;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #6F5665;
+        }
+
+        .topic-card h3 {
+            color: #6F5665;
+            overflow-wrap: anywhere;
+        }
+
+        .topic-card p {
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        #empty-state {
+            padding: 15px 0;
+            color: #6F5665;
+        }
+
+        button:focus-visible,
+        input:focus-visible,
+        textarea:focus-visible,
+        a:focus-visible {
+            outline: 3px solid #6F5665;
+            outline-offset: 3px;
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                width: 92%;
+            }
+
+            .panel,
+            .topic-card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>My Extra Learning</h1>
+        <p>Save topics you want to explore beyond school.</p>
+    </header>
+
+    <main class="container">
+        <a class="back" href="dashboard.html">← Back to Student Hub</a>
+
+        <section class="panel">
+            <h2 id="form-heading">Save a Topic</h2>
+
+            <form id="topic-form">
+                <label for="topic-title">Topic name</label>
+                <input id="topic-title" maxlength="150" required
+                       placeholder="e.g. Neuroplasticity">
+
+                <label for="topic-notes">Notes or questions (optional)</label>
+                <textarea id="topic-notes" rows="4"
+                          placeholder="What do you want to learn?"></textarea>
+
+                <button type="submit" id="save-button">Save Topic</button>
+                <button type="button" id="cancel-edit" hidden>
+                    Cancel Edit
+                </button>
+            </form>
+        </section>
+
+        <section>
+            <h2>My Saved Topics</h2>
+            <p id="empty-state">No saved topics yet. Add your first topic above.</p>
+            <div id="topic-list"></div>
+        </section>
+    </main>
+
+    <script>
+        const STORAGE_KEY = "extraLearningTopics";
+        const form = document.getElementById("topic-form");
+        const titleInput = document.getElementById("topic-title");
+        const notesInput = document.getElementById("topic-notes");
+        const saveButton = document.getElementById("save-button");
+        const cancelButton = document.getElementById("cancel-edit");
+        const topicList = document.getElementById("topic-list");
+        const emptyState = document.getElementById("empty-state");
+
+        let topics = [];
+        let editingId = null;
+
+        try {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            const parsed = saved ? JSON.parse(saved) : [];
+            if (Array.isArray(parsed)) topics = parsed;
+        } catch (error) {
+            alert("Saved topics could not be read. Check browser storage.");
+        }
+
+        function persistTopics() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(topics));
+                return true;
+            } catch (error) {
+                alert("Topics could not be saved. Browser storage may be unavailable.");
+                return false;
+            }
+        }
+
+        function resetForm() {
+            form.reset();
+            editingId = null;
+            saveButton.textContent = "Save Topic";
+            document.getElementById("form-heading").textContent = "Save a Topic";
+            cancelButton.hidden = true;
+        }
+
+        function renderTopics() {
+            topicList.replaceChildren();
+            emptyState.hidden = topics.length > 0;
+
+            topics.forEach((topic) => {
+                const card = document.createElement("article");
+                card.className = "topic-card";
+
+                const heading = document.createElement("h3");
+                heading.textContent = topic.title;
+                card.appendChild(heading);
+
+                if (topic.notes) {
+                    const notes = document.createElement("p");
+                    notes.textContent = topic.notes;
+                    card.appendChild(notes);
+                }
+
+                const editButton = document.createElement("button");
+                editButton.type = "button";
+                editButton.textContent = "Edit";
+                editButton.addEventListener("click", () => {
+                    editingId = topic.id;
+                    titleInput.value = topic.title;
+                    notesInput.value = topic.notes || "";
+                    saveButton.textContent = "Update Topic";
+                    document.getElementById("form-heading").textContent =
+                        "Edit Topic";
+                    cancelButton.hidden = false;
+                    titleInput.focus();
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                });
+
+                const deleteButton = document.createElement("button");
+                deleteButton.type = "button";
+                deleteButton.textContent = "Delete";
+                deleteButton.addEventListener("click", () => {
+                    if (!confirm("Delete this topic?")) return;
+
+                    const previousTopics = topics;
+                    topics = topics.filter(item => item.id !== topic.id);
+
+                    if (!persistTopics()) {
+                        topics = previousTopics;
+                    } else {
+                        if (editingId === topic.id) resetForm();
+                        renderTopics();
+                    }
+                });
+
+                card.append(editButton, deleteButton);
+                topicList.appendChild(card);
+            });
+        }
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const title = titleInput.value.trim();
+            const notes = notesInput.value.trim();
+
+            if (!title) {
+                alert("Please enter a topic name.");
+                return;
+            }
+
+            const previousTopics = topics;
+
+            if (editingId !== null) {
+                topics = topics.map(topic =>
+                    topic.id === editingId
+                        ? { ...topic, title, notes }
+                        : topic
+                );
+            } else {
+                topics = [{
+                    id: String(Date.now()) + Math.random().toString(16).slice(2),
+                    title,
+                    notes
+                }, ...topics];
+            }
+
+            if (!persistTopics()) {
+                topics = previousTopics;
+                return;
+            }
+
+            resetForm();
+            renderTopics();
+        });
+
+        cancelButton.addEventListener("click", resetForm);
+        renderTopics();
+    </script>
+</body>
+</html>
