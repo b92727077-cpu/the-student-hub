@@ -130,11 +130,13 @@
     </style>
 </head>
 <script>
-    const name = localStorage.getItem("studentName");
+    const savedName = localStorage.getItem("studentName");
 
-    if (name) {
+    if (!savedName || !savedName.trim()) {
+        window.location.replace("index.html");
+    } else {
         document.getElementById("welcome-message").textContent =
-            "Welcome, " + name + " 👋!";
+            "Welcome, " + savedName.trim() + " 👋!";
     }
 </script>
 <body>
