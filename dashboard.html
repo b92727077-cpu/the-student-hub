@@ -123,8 +123,8 @@
 
 .extra-learning p {
     color: #3F3540;
-};
-        }
+
+      }
 
         .extra-learning h2 {
             color: #6F5665;
@@ -151,16 +151,7 @@
         }
     </style>
 </head>
-<script>
-    const savedName = localStorage.getItem("studentName");
 
-    if (!savedName || !savedName.trim()) {
-        window.location.replace("index.html");
-    } else {
-        document.getElementById("welcome-message").textContent =
-            "Welcome, " + savedName.trim() + " 👋!";
-    }
-</script>
 <body>
 
     <header>
@@ -224,11 +215,28 @@
         Download a backup of your saved study data or restore it later.
     </p>
 </a>
+        <a href="study-planner.html" class="extra-learning">
+    <h2>📅 Study Planner</h2>
+    <p>Manage your daily study tasks and weekly timetable.</p>
+</a>
+
+<a href="backup.html" class="extra-learning">
+    <h2>💾 Data Backup & Restore</h2>
+    <p>Download a backup of your saved study data or restore it later.</p>
+</a>
     </main>
 
     <footer>
         <p>© 2026 The Student Hub — Bakhtawar</p>
     </footer>
-
+<script>
+    const savedName = localStorage.getItem("studentName");
+    if (!savedName || !savedName.trim()) {
+        window.location.replace("index.html");
+    } else {
+        document.getElementById("welcome-message").textContent =
+            "Welcome, " + savedName.trim() + " 👋!";
+    }
+</script>
 </body>
 </html>
