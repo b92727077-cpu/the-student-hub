@@ -1,17 +1,43 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Subjects · The Student Hub</title><link rel="stylesheet" href="app.css"></head>
-<body data-page="subjects"><div class="app-shell">
-<aside class="sidebar" id="sidebar"><a class="brand" href="dashboard.html"><span class="brand-mark">SH</span><span><span class="brand-name">The Student Hub</span><span class="brand-tagline">Your personal learning space</span></span></a><div><div class="nav-label">Workspace</div><nav class="sidebar-nav" aria-label="Main navigation"><a class="nav-link" data-nav="dashboard" href="dashboard.html"><span class="nav-icon">⌂</span>Dashboard</a><a class="nav-link" data-nav="subjects" href="subjects.html"><span class="nav-icon">▤</span>Subjects</a><a class="nav-link" data-nav="planner" href="study-planner.html"><span class="nav-icon">▦</span>Study Planner</a><a class="nav-link" data-nav="notes" href="notes.html"><span class="nav-icon">✎</span>Notes</a><a class="nav-link" data-nav="extra" href="extra-learning.html"><span class="nav-icon">✦</span>Extra Learning</a><a class="nav-link" data-nav="revision" href="revision.html"><span class="nav-icon">▣</span>Revision & Practice</a><a class="nav-link" data-nav="timer" href="focus-timer.html"><span class="nav-icon">◷</span>Focus Timer</a><a class="nav-link" data-nav="analysis" href="study-analysis.html"><span class="nav-icon">▥</span>Study Analysis</a></nav></div><div><div class="nav-label">Preferences</div><nav class="sidebar-nav"><a class="nav-link" data-nav="settings" href="settings.html"><span class="nav-icon">⚙</span>Settings & Themes</a><a class="nav-link" data-nav="backup" href="backup.html"><span class="nav-icon">⇩</span>Backup & Restore</a></nav></div><div class="sidebar-bottom">Made for your learning journey.<br>Saved locally in this browser.</div></aside><div class="sidebar-backdrop" aria-hidden="true"></div>
-<div class="main-area"><header class="topbar"><div class="topbar-left"><button class="btn btn-secondary mobile-menu-button" id="nav-toggle" aria-label="Open navigation" aria-expanded="false">☰</button><div><div class="eyebrow">Learn by subject</div><h1 class="page-heading">My Subjects</h1></div></div><div class="topbar-actions"><div class="user-chip"><span class="avatar">✦</span><span data-user-name>Bakhtawar</span></div></div></header>
-<main class="content"><section class="hero"><div><h2>Choose what you're studying.</h2><p>Open a subject to reach its current chapter page. Subject pages that still use the older layout will be redesigned in the next migration pass.</p></div><div class="hero-illustration" aria-hidden="true">🗂️</div></section>
-<div class="section-heading"><div><h2>All subjects</h2><p>Eight core subjects, one organized workspace.</p></div></div>
-<section class="grid grid-3">
-<a class="card card-link" href="english.html"><span class="pill">Language</span><h3 style="margin-top:13px">English</h3><p class="muted small">Reading, literature and writing practice.</p></a>
-<a class="card card-link" href="urdu.html"><span class="pill">Language</span><h3 style="margin-top:13px">Urdu</h3><p class="muted small">Language skills, literature and revision.</p></a>
-<a class="card card-link" href="physics.html"><span class="pill">Science</span><h3 style="margin-top:13px">Physics</h3><p class="muted small">Concepts, numericals and formula revision.</p></a>
-<a class="card card-link" href="mathematics.html"><span class="pill">Practice</span><h3 style="margin-top:13px">Mathematics</h3><p class="muted small">Problem-solving and step-by-step practice.</p></a>
-<a class="card card-link" href="computer.html"><span class="pill">Technology</span><h3 style="margin-top:13px">Computer Science</h3><p class="muted small">Software development and computing concepts.</p></a>
-<a class="card card-link" href="statistics.html"><span class="pill">Practice</span><h3 style="margin-top:13px">Statistics</h3><p class="muted small">Data, probability and distributions.</p></a>
-<a class="card card-link" href="tarjuma-tul-quran.html"><span class="pill">Quran</span><h3 style="margin-top:13px">Tarjuma-tul-Quran</h3><p class="muted small">Translation, meanings and revision.</p></a>
-<a class="card card-link" href="islamiyat.html"><span class="pill">Studies</span><h3 style="margin-top:13px">Islamiat</h3><p class="muted small">Key ideas, learning notes and revision.</p></a>
-</section><p class="footer-note">These subject cards link to your existing pages. Don't activate a chapter link until it opens the correct subject and chapter.</p></main></div></div><script src="app.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subjects · The Student Hub</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, sans-serif; background: #F6F1F4; color: #3F3540; }
+    header { background: #927487; color: white; padding: 28px; }
+    header h1 { margin: 0 0 6px; }
+    header p { margin: 0; }
+    .container { width: 90%; max-width: 900px; margin: 36px auto; }
+    .back { display: inline-block; margin: 0 0 22px; text-decoration: none; font-weight: bold; color: #6F5665; }
+    .option, .chapter-card, .practice-card { display: block; padding: 22px; margin: 14px 0; background: white; border-radius: 14px; color: #6F5665; text-decoration: none; box-shadow: 0 3px 10px rgba(80,60,70,.08); transition: .2s ease; }
+    .option:hover, .chapter-card:hover, .practice-card:hover { background: #F3E9EE; transform: translateY(-2px); }
+    .chapter-card h3, .option h3 { margin: 0; }
+    .chapter-disabled { opacity: .76; }
+    .chapter-disabled p { margin: 8px 0 0; font-size: 13px; color: #6F626C; }
+    .notice { background: white; border: 1px solid #E6DCE2; padding: 22px; border-radius: 16px; }
+    .notice h2 { margin-top: 0; color: #6F5665; }
+    .quick-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .quick-links a { display: inline-block; padding: 10px 14px; background: white; border: 1px solid #E6DCE2; border-radius: 10px; text-decoration: none; color: #6F5665; font-weight: bold; }
+    @media (max-width: 600px) { .container { width: calc(100% - 28px); margin: 22px auto; } header { padding: 22px 18px; } }
+  </style>
+  
+</head>
+<body>
+<header><h1>My Subjects</h1><p>Choose a subject to study.</p></header>
+<main class="container"><a class="back" href="dashboard.html">← Back to Dashboard</a>
+<section class="notice"><h2>Eight core subjects</h2><p>Your subjects are organized here. Existing chapters remain available, and subjects without chapter lists are clearly marked until their curriculum is added.</p></section>
+<a class="option" href="english.html"><h3>English</h3><p>English A and English B</p></a>
+<a class="option" href="urdu.html"><h3>Urdu</h3><p>Urdu A and Urdu B</p></a>
+<a class="option" href="physics.html"><h3>Physics</h3><p>Chapter list to be added</p></a>
+<a class="option" href="mathematics.html"><h3>Mathematics</h3><p>Chapter list to be added</p></a>
+<a class="option" href="computer.html"><h3>Computer Science</h3><p>Chapter 1 flashcards available</p></a>
+<a class="option" href="statistics.html"><h3>Statistics</h3><p>Chapter list visible; practice awaits subject-specific data</p></a>
+<a class="option" href="tarjuma-tul-quran.html"><h3>Tarjuma-tul-Quran</h3><p>Chapter list to be added</p></a>
+<a class="option" href="islamiyat.html"><h3>Islamiat</h3><p>Chapter list to be added</p></a>
+</main>
+<script src="legacy-shell.js"></script>
+</body>
+</html>

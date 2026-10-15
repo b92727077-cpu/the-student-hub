@@ -1,132 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chapter - The Student Hub</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: #F6F1F4;
-            color: #3F3540;
-            min-height: 100vh;
-        }
-
-        header {
-            background: #927487;
-            color: white;
-            text-align: center;
-            padding: 28px;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 800px;
-            margin: 50px auto;
-        }
-
-        .back {
-            display: inline-block;
-            margin-bottom: 30px;
-            color: #6F5665;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .back:hover {
-            text-decoration: underline;
-        }
-
-        .chapter-title {
-            text-align: center;
-            color: #6F5665;
-            margin-bottom: 35px;
-        }
-
-        .practice-card {
-            display: block;
-            background: #FFFFFF;
-            color: #6F5665;
-            text-decoration: none;
-            text-align: center;
-            padding: 35px;
-            border-radius: 16px;
-            box-shadow: 0 3px 10px rgba(80, 60, 70, 0.08);
-            transition: 0.2s ease;
-        }
-
-        .practice-card:hover {
-            background: #F3E9EE;
-            box-shadow: 0 8px 20px rgba(80, 60, 70, 0.16);
-            transform: translateY(-3px);
-        }
-
-        .practice-card h2 {
-            margin-bottom: 10px;
-        }
-
-        .practice-card p {
-            color: #3F3540;
-        }
-    </style>
-</head>
-
-<body>
-
-    <header>
-        <h1>Computer Science</h1>
-        <p>The Student Hub</p>
-    </header>
-
-    <main class="container">
-
-        <a href="computer.html" class="back">
-            ← Back to Computer Science
-        </a>
-
-        <section class="chapter-title">
-            <h2 id="chapter-title">Loading Chapter...</h2>
-        </section>
-
-        <a id="practice-link" href="#" class="practice-card">
-            <h2>Practice</h2>
-            <p>Open Flashcards and start practicing.</p>
-        </a>
-
-    </main>
-
-    <!-- Pehle data load hoga, taake JavaScript ko pta ho ke chapters me kya hai -->
-    <script src="flashcards.js"></script>
-
-    <!-- Is ke baad hamara code chalega jo page par sahi chapter name dikhaye ga -->
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const params = new URLSearchParams(window.location.search);
-            const chapterNumber = params.get("chapter");
-
-            // Check kar rahe hain ke flashcards.js ka data available hai ya nahi
-            if (typeof chapterData !== "undefined" && chapterData[chapterNumber]) {
-                const chapter = chapterData[chapterNumber];
-                
-                // Chapter name set karna (e.g., 1_ Introduction to Software Development)
-                document.getElementById("chapter-title").textContent = 
-                    chapterNumber + "_ " + chapter.title;
-
-                // Practice button ko sahi link dena (e.g., flashcards.html?chapter=1)
-                document.getElementById("practice-link").href = 
-                    "flashcards.html?chapter=" + chapterNumber;
-            } else {
-                document.getElementById("chapter-title").textContent = "Chapter not found";
-            }
-        });
-    </script>
-
-</body>
-</html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Chapter Practice · The Student Hub</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#F6F1F4;color:#3F3540}header{background:#927487;color:white;padding:28px}header h1{margin:0 0 6px}.container{width:90%;max-width:850px;margin:35px auto}.back{display:inline-block;margin-bottom:22px;color:#6F5665;text-decoration:none;font-weight:bold}.practice-card{display:block;padding:26px;background:white;border-radius:16px;color:#6F5665;text-decoration:none;box-shadow:0 3px 10px rgba(80,60,70,.08);transition:.2s ease}.practice-card:hover{background:#F3E9EE;transform:translateY(-2px)}.notice{background:white;border:1px solid #E6DCE2;border-radius:16px;padding:22px}.notice h2{color:#6F5665}@media(max-width:600px){.container{width:calc(100% - 28px);margin:22px auto}header{padding:22px 18px}}
+</style></head><body>
+<header><h1 id="subject-heading">Chapter Practice</h1><p>The Student Hub</p></header>
+<main class="container"><a id="back-link" class="back" href="computer.html">← Back to Computer Science</a>
+<section class="notice"><h2 id="chapter-title">Loading chapter...</h2><p id="chapter-description">Checking available learning content.</p></section>
+<a id="practice-link" class="practice-card" href="flashcards.html?subject=computer&chapter=1" hidden><h2>Practice flashcards →</h2><p>Open the available flashcards for this chapter.</p></a>
+</main>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(location.search);
+  const subject = (params.get('subject') || 'computer').toLowerCase();
+  const chapter = params.get('chapter') || '1';
+  const title = document.getElementById('chapter-title');
+  const desc = document.getElementById('chapter-description');
+  const heading = document.getElementById('subject-heading');
+  const back = document.getElementById('back-link');
+  const practice = document.getElementById('practice-link');
+  if (subject === 'computer' && chapter === '1') {
+    heading.textContent = 'Computer Science';
+    title.textContent = '1_ Introduction to Software Development';
+    desc.textContent = 'Flashcards are available for this chapter.';
+    back.href = 'computer.html';
+    back.textContent = '← Back to Computer Science';
+    practice.hidden = false;
+  } else if (subject === 'statistics') {
+    heading.textContent = 'Statistics';
+    title.textContent = 'Statistics practice is not connected yet';
+    desc.textContent = 'This chapter is not linked to Computer Science content. Statistics flashcards will be enabled after the correct subject data is added.';
+    back.href = 'statistics.html';
+    back.textContent = '← Back to Statistics';
+  } else {
+    heading.textContent = 'Computer Science';
+    title.textContent = 'Chapter content not available yet';
+    desc.textContent = 'Currently, only Computer Science Chapter 1 has connected flashcards.';
+    back.href = 'computer.html';
+    back.textContent = '← Back to Computer Science';
+  }
+});
+</script>
+<script src="legacy-shell.js"></script>
+</body></html>

@@ -1,138 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Computer Science - The Student Hub</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-body {
-    font-family: Arial, sans-serif;
-    background: #F6F1F4;
-    color: #3F3540;
-}
-        header {
-            background: #927487;
-            color: white;
-            text-align: center;
-            padding: 25px;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1000px;
-            margin: 50px auto;
-        }
-
-        .back {
-            display: inline-block;
-            margin-bottom: 30px;
-            color: #6F5665;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .back:hover {
-            color: #927487;
-        }
-
-        .chapters {
-            display: grid;
-            grid-template-columns: 1f;
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .chapter-card {
-            display: block;
-            background: #FFFFFF;
-            color: #6F5665;
-            text-decoration: none;
-            padding: 24px;
-            border-radius: 14px;
-            box-shadow: 0 3px 10px rgba(80, 60, 70, 0.08);
-            transition: 0.2s ease;
-        }
-
-        .chapter-card:hover {
-            background: #E8D9DE;
-            box-shadow: 0 8px 18px rgba(80, 60, 70, 0.14);
-            transform: translateY(-3px);
-        }
-
-        .chapter-card h3 {
-            font-size: 18px;
-            line-height: 1.4;
-        }
-
-        @media (max-width: 700px) {
-            .chapters {
-               grid-template-columns: 1fr; 
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Computer Science · The Student Hub</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, sans-serif; background: #F6F1F4; color: #3F3540; }
+    header { background: #927487; color: white; padding: 28px; }
+    header h1 { margin: 0 0 6px; }
+    header p { margin: 0; }
+    .container { width: 90%; max-width: 900px; margin: 36px auto; }
+    .back { display: inline-block; margin: 0 0 22px; text-decoration: none; font-weight: bold; color: #6F5665; }
+    .option, .chapter-card, .practice-card { display: block; padding: 22px; margin: 14px 0; background: white; border-radius: 14px; color: #6F5665; text-decoration: none; box-shadow: 0 3px 10px rgba(80,60,70,.08); transition: .2s ease; }
+    .option:hover, .chapter-card:hover, .practice-card:hover { background: #F3E9EE; transform: translateY(-2px); }
+    .chapter-card h3, .option h3 { margin: 0; }
+    .chapter-disabled { opacity: .76; }
+    .chapter-disabled p { margin: 8px 0 0; font-size: 13px; color: #6F626C; }
+    .notice { background: white; border: 1px solid #E6DCE2; padding: 22px; border-radius: 16px; }
+    .notice h2 { margin-top: 0; color: #6F5665; }
+    .quick-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .quick-links a { display: inline-block; padding: 10px 14px; background: white; border: 1px solid #E6DCE2; border-radius: 10px; text-decoration: none; color: #6F5665; font-weight: bold; }
+    @media (max-width: 600px) { .container { width: calc(100% - 28px); margin: 22px auto; } header { padding: 22px 18px; } }
+  </style>
+  
 </head>
-
 <body>
-
-    <header>
-        <h1>Computer Science</h1>
-        <p>The Student Hub</p>
-    </header>
-
-    <main class="container">
-
-        <a href="dashboard.html" class="back">← Back to Student Hub</a>
-
-        <h2>Chapters</h2>
-
-        <section class="chapters">
-
-         <a href="chapter.html?chapter=1" class="chapter-card">
-    <h3>1_ Introduction to Software Development</h3>
-</a> 
-
-            <a href="chapter.html?chapter=2" class="chapter-card">
-                <h3>2_ Python Programming</h3>
-            </a>
-
-            <a href="chapter.html?chapter=3" class="chapter-card">
-                <h3>3_ Algorithms and Problem Solving</h3>
-            </a>
-
-            <a href="chapter.html?chapter=4" class="chapter-card">
-                <h3>4_ Computational Structure</h3>
-            </a>
-
-            <a href="chapter.html?chapter=5" class="chapter-card">
-                <h3>5_ Data and Analytics</h3>
-            </a>
-
-            <a href="chapter.html?chapter=6" class="chapter-card">
-                <h3>6_ Emerging Technologies</h3>
-            </a>
-
-            <a href="chapter.html?chapter=7" class="chapter-card">
-                <h3>7_ Legal and Ethical Aspects of Computing System</h3>
-            </a>
-
-            <a href="chapter.html?chapter=8" class="chapter-card">
-                <h3>8_ Online Research and Digital Literacy</h3>
-            </a>
-
-            <a href="chapter.html?chapter=9" class="chapter-card">
-                <h3>9_ Entrepreneurship and Digital Age</h3>
-            </a>
-
-        </section>
-
-    </main>
-
+<header><h1>Computer Science</h1><p>Chapters and practice</p></header><main class="container"><a class="back" href="subjects.html">← Back to Subjects</a><section class="notice"><h2>Chapters</h2><p>Chapter 1 currently has flashcards connected. Other chapters stay visible but inactive until their learning content is added.</p></section><a class="chapter-card" href="chapter.html?subject=computer&chapter=1"><h3>1_ Introduction to Software Development</h3><p>Chapter content and flashcards available.</p></a><div class="chapter-card chapter-disabled" aria-disabled="true"><h3>2_ Python Programming</h3><p>Practice content not connected yet.</p></div><div class="chapter-card chapter-disabled" aria-disabled="true"><h3>3_ Algorithms and Problem Solving</h3><p>Practice content not connected yet.</p></div><div class="chapter-card chapter-disabled" aria-disabled="true"><h3>4_ Computational Structure</h3><p>Practice content not connected yet.</p></div><div class="chapter-card chapter-disabled" aria-disabled="true"><h3>5_ Data and Analytics</h3><p>Practice content not connected yet.</p></div><div class="chapter-card chapter-disabled" aria-disabled="true"><h3>6_ Emerging Technologies</h3><p>Practice content not connected yet.</p></div><div class="chapter-card chapter-disabled" aria-disabled="true"><h3>7_ Legal and Ethical Aspects of Computing System</h3><p>Practice content not connected yet.</p></div><div class="chapter-card chapter-disabled" aria-disabled="true"><h3>8_ Online Research and Digital Literacy</h3><p>Practice content not connected yet.</p></div><div class="chapter-card chapter-disabled" aria-disabled="true"><h3>9_ Entrepreneurship and Digital Age</h3><p>Practice content not connected yet.</p></div></main>
+<script src="legacy-shell.js"></script>
 </body>
 </html>
