@@ -1,0 +1,582 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Planner - The Student Hub</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #F6F1F4;
+            color: #3F3540;
+        }
+
+        header {
+            background: #927487;
+            color: white;
+            text-align: center;
+            padding: 25px 18px;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 950px;
+            margin: 30px auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 22px;
+            color: #6F5665;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .panel {
+            background: white;
+            padding: 24px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 10px rgba(80, 60, 70, 0.08);
+        }
+
+        h2 {
+            color: #6F5665;
+            margin-top: 0;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin: 14px 0 7px;
+        }
+
+        input, select {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #CDBBC5;
+            border-radius: 8px;
+            background: white;
+            color: #3F3540;
+            font: inherit;
+        }
+
+        button {
+            border: none;
+            border-radius: 9px;
+            padding: 11px 16px;
+            margin: 12px 6px 0 0;
+            background: #927487;
+            color: white;
+            font: inherit;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        button:hover {
+            background: #6F5665;
+        }
+
+        button:focus-visible,
+        input:focus-visible,
+        select:focus-visible,
+        a:focus-visible {
+            outline: 3px solid #6F5665;
+            outline-offset: 3px;
+        }
+
+        .item-card {
+            background: #FCF9FB;
+            border: 1px solid #E8D9DE;
+            border-radius: 12px;
+            padding: 18px;
+            margin-top: 14px;
+            overflow-wrap: anywhere;
+        }
+
+        .item-card h3 {
+            margin: 0 0 10px;
+            color: #6F5665;
+        }
+
+        .item-card p {
+            line-height: 1.5;
+            margin: 7px 0;
+        }
+
+        .item-card.completed {
+            opacity: 0.75;
+            background: #F3E9EE;
+        }
+
+        .item-card.completed h3 {
+            text-decoration: line-through;
+        }
+
+        .complete-label {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-weight: normal;
+        }
+
+        .complete-label input {
+            width: 18px;
+            height: 18px;
+            margin: 0;
+        }
+
+        .empty-state {
+            color: #6F5665;
+            padding: 12px 0;
+        }
+
+        .status {
+            min-height: 24px;
+            font-weight: bold;
+            overflow-wrap: anywhere;
+        }
+
+        @media (max-width: 550px) {
+            .container {
+                width: 94%;
+            }
+
+            .panel {
+                padding: 17px;
+            }
+
+            header {
+                padding: 22px 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Study Planner</h1>
+        <p>Plan your tasks and organize your week.</p>
+    </header>
+
+    <main class="container">
+        <a class="back-link" href="dashboard.html">
+            ← Back to Student Hub
+        </a>
+
+        <section class="panel">
+            <h2 id="task-form-heading">Add a Study Task</h2>
+
+            <form id="task-form">
+                <label for="task-title">Task name</label>
+                <input id="task-title" maxlength="150"
+                       placeholder="e.g. Revise Chapter 1" required>
+
+                <label for="task-subject">Subject</label>
+                <select id="task-subject" required>
+                    <option value="">Choose a subject</option>
+                    <option>English</option>
+                    <option>Urdu</option>
+                    <option>Physics</option>
+                    <option>Mathematics</option>
+                    <option>Computer Science</option>
+                    <option>Statistics</option>
+                    <option>Tarjuma-tul-Quran</option>
+                    <option>Islamiat</option>
+                </select>
+
+                <label for="task-date">Due date</label>
+                <input id="task-date" type="date" required>
+
+                <button id="task-save-button" type="submit">
+                    Add Task
+                </button>
+
+                <button id="task-cancel-button" type="button" hidden>
+                    Cancel Edit
+                </button>
+            </form>
+
+            <p id="task-status" class="status" role="status"
+               aria-live="polite"></p>
+        </section>
+
+        <section class="panel">
+            <h2>My Study Tasks</h2>
+            <p id="task-empty" class="empty-state">
+                No tasks yet. Add your first study task above.
+            </p>
+            <div id="task-list"></div>
+        </section>
+
+        <section class="panel">
+            <h2 id="schedule-form-heading">Add a Timetable Session</h2>
+
+            <form id="schedule-form">
+                <label for="schedule-activity">Activity or topic</label>
+                <input id="schedule-activity" maxlength="150"
+                       placeholder="e.g. Physics revision" required>
+
+                <label for="schedule-day">Day</label>
+                <select id="schedule-day" required>
+                    <option value="">Choose a day</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
+                </select>
+
+                <label for="schedule-start">Start time</label>
+                <input id="schedule-start" type="time" required>
+
+                <label for="schedule-end">End time</label>
+                <input id="schedule-end" type="time" required>
+
+                <button id="schedule-save-button" type="submit">
+                    Add Session
+                </button>
+
+                <button id="schedule-cancel-button"
+                        type="button" hidden>
+                    Cancel Edit
+                </button>
+            </form>
+
+            <p id="schedule-status" class="status" role="status"
+               aria-live="polite"></p>
+        </section>
+
+        <section class="panel">
+            <h2>My Weekly Timetable</h2>
+            <p id="schedule-empty" class="empty-state">
+                No sessions yet. Add your first session above.
+            </p>
+            <div id="schedule-list"></div>
+        </section>
+    </main>
+
+    <script>
+        const TASK_KEY = "studyTasks";
+        const SCHEDULE_KEY = "studyTimetable";
+
+        const DAYS = [
+            "Monday", "Tuesday", "Wednesday", "Thursday",
+            "Friday", "Saturday", "Sunday"
+        ];
+
+        function readList(key) {
+            try {
+                const value = localStorage.getItem(key);
+                if (!value) return [];
+
+                const parsed = JSON.parse(value);
+                return Array.isArray(parsed) ? parsed : [];
+            } catch (error) {
+                return [];
+            }
+        }
+
+        function saveList(key, list) {
+            try {
+                localStorage.setItem(key, JSON.stringify(list));
+                return true;
+            } catch (error) {
+                alert(
+                    "Could not save data. Browser storage may be unavailable."
+                );
+                return false;
+            }
+        }
+
+        function makeId() {
+            return Date.now().toString(36) +
+                Math.random().toString(36).slice(2);
+        }
+
+        let tasks = readList(TASK_KEY);
+        let schedule = readList(SCHEDULE_KEY);
+        let editingTaskId = null;
+        let editingSessionId = null;
+
+        const taskForm = document.getElementById("task-form");
+        const taskTitle = document.getElementById("task-title");
+        const taskSubject = document.getElementById("task-subject");
+        const taskDate = document.getElementById("task-date");
+        const taskList = document.getElementById("task-list");
+
+        const scheduleForm = document.getElementById("schedule-form");
+        const activityInput = document.getElementById("schedule-activity");
+        const dayInput = document.getElementById("schedule-day");
+        const startInput = document.getElementById("schedule-start");
+        const endInput = document.getElementById("schedule-end");
+        const scheduleList = document.getElementById("schedule-list");
+
+        function makeButton(label, action) {
+            const button = document.createElement("button");
+            button.type = "button";
+            button.textContent = label;
+            button.addEventListener("click", action);
+            return button;
+        }
+
+        function addText(parent, tag, text) {
+            const element = document.createElement(tag);
+            element.textContent = text;
+            parent.appendChild(element);
+            return element;
+        }
+
+        function resetTaskForm() {
+            taskForm.reset();
+            editingTaskId = null;
+            document.getElementById("task-form-heading").textContent =
+                "Add a Study Task";
+            document.getElementById("task-save-button").textContent =
+                "Add Task";
+            document.getElementById("task-cancel-button").hidden = true;
+        }
+
+        function renderTasks() {
+            taskList.replaceChildren();
+            document.getElementById("task-empty").hidden = tasks.length > 0;
+
+            const ordered = [...tasks].sort((a, b) => {
+                return (a.dueDate || "").localeCompare(b.dueDate || "");
+            });
+
+            ordered.forEach((task) => {
+                const card = document.createElement("article");
+                card.className = "item-card";
+                if (task.completed) card.classList.add("completed");
+
+                addText(card, "h3", task.title);
+                addText(card, "p", "Subject: " + task.subject);
+                addText(card, "p", "Due: " + task.dueDate);
+
+                const label = document.createElement("label");
+                label.className = "complete-label";
+
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.checked = Boolean(task.completed);
+                checkbox.addEventListener("change", () => {
+                    const updated = tasks.map(item =>
+                        item.id === task.id
+                            ? { ...item, completed: checkbox.checked }
+                            : item
+                    );
+
+                    if (saveList(TASK_KEY, updated)) {
+                        tasks = updated;
+                        renderTasks();
+                    } else {
+                        checkbox.checked = !checkbox.checked;
+                    }
+                });
+
+                label.append(checkbox, document.createTextNode(" Completed"));
+                card.appendChild(label);
+
+                card.appendChild(makeButton("Edit", () => {
+                    editingTaskId = task.id;
+                    taskTitle.value = task.title;
+                    taskSubject.value = task.subject;
+                    taskDate.value = task.dueDate;
+                    document.getElementById("task-form-heading").textContent =
+                        "Edit Study Task";
+                    document.getElementById("task-save-button").textContent =
+                        "Save Changes";
+                    document.getElementById("task-cancel-button").hidden = false;
+                    taskTitle.focus();
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                }));
+
+                card.appendChild(makeButton("Delete", () => {
+                    if (!confirm("Delete this study task?")) return;
+
+                    const updated = tasks.filter(item => item.id !== task.id);
+                    if (saveList(TASK_KEY, updated)) {
+                        tasks = updated;
+                        if (editingTaskId === task.id) resetTaskForm();
+                        renderTasks();
+                    }
+                }));
+
+                taskList.appendChild(card);
+            });
+        }
+
+        taskForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const title = taskTitle.value.trim();
+            const subject = taskSubject.value;
+            const dueDate = taskDate.value;
+
+            if (!title || !subject || !dueDate) {
+                document.getElementById("task-status").textContent =
+                    "Please complete all task fields.";
+                return;
+            }
+
+            const existing = tasks.find(task => task.id === editingTaskId);
+
+            const entry = {
+                id: editingTaskId || makeId(),
+                title,
+                subject,
+                dueDate,
+                completed: existing ? Boolean(existing.completed) : false
+            };
+
+            const updated = editingTaskId
+                ? tasks.map(task => task.id === editingTaskId ? entry : task)
+                : [entry, ...tasks];
+
+            if (saveList(TASK_KEY, updated)) {
+                tasks = updated;
+                resetTaskForm();
+                renderTasks();
+                document.getElementById("task-status").textContent =
+                    "Task saved successfully.";
+            }
+        });
+
+        document.getElementById("task-cancel-button")
+            .addEventListener("click", resetTaskForm);
+
+        function resetScheduleForm() {
+            scheduleForm.reset();
+            editingSessionId = null;
+            document.getElementById("schedule-form-heading").textContent =
+                "Add a Timetable Session";
+            document.getElementById("schedule-save-button").textContent =
+                "Add Session";
+            document.getElementById("schedule-cancel-button").hidden = true;
+        }
+
+        function renderSchedule() {
+            scheduleList.replaceChildren();
+            document.getElementById("schedule-empty").hidden =
+                schedule.length > 0;
+
+            const ordered = [...schedule].sort((a, b) => {
+                const dayDifference =
+                    DAYS.indexOf(a.day) - DAYS.indexOf(b.day);
+
+                return dayDifference || a.start.localeCompare(b.start);
+            });
+
+            ordered.forEach((session) => {
+                const card = document.createElement("article");
+                card.className = "item-card";
+
+                addText(card, "h3", session.day);
+                addText(card, "p", session.activity);
+                addText(
+                    card,
+                    "p",
+                    session.start + " – " + session.end
+                );
+
+                card.appendChild(makeButton("Edit", () => {
+                    editingSessionId = session.id;
+                    activityInput.value = session.activity;
+                    dayInput.value = session.day;
+                    startInput.value = session.start;
+                    endInput.value = session.end;
+
+                    document.getElementById("schedule-form-heading")
+                        .textContent = "Edit Timetable Session";
+                    document.getElementById("schedule-save-button")
+                        .textContent = "Save Changes";
+                    document.getElementById("schedule-cancel-button")
+                        .hidden = false;
+
+                    activityInput.focus();
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                }));
+
+                card.appendChild(makeButton("Delete", () => {
+                    if (!confirm("Delete this timetable session?")) return;
+
+                    const updated = schedule.filter(
+                        item => item.id !== session.id
+                    );
+
+                    if (saveList(SCHEDULE_KEY, updated)) {
+                        schedule = updated;
+                        if (editingSessionId === session.id) {
+                            resetScheduleForm();
+                        }
+                        renderSchedule();
+                    }
+                }));
+
+                scheduleList.appendChild(card);
+            });
+        }
+
+        scheduleForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const activity = activityInput.value.trim();
+            const day = dayInput.value;
+            const start = startInput.value;
+            const end = endInput.value;
+
+            if (!activity || !day || !start || !end) {
+                document.getElementById("schedule-status").textContent =
+                    "Please complete all timetable fields.";
+                return;
+            }
+
+            if (end <= start) {
+                document.getElementById("schedule-status").textContent =
+                    "End time must be later than start time.";
+                return;
+            }
+
+            const entry = {
+                id: editingSessionId || makeId(),
+                activity,
+                day,
+                start,
+                end
+            };
+
+            const updated = editingSessionId
+                ? schedule.map(item =>
+                    item.id === editingSessionId ? entry : item
+                )
+                : [...schedule, entry];
+
+            if (saveList(SCHEDULE_KEY, updated)) {
+                schedule = updated;
+                resetScheduleForm();
+                renderSchedule();
+                document.getElementById("schedule-status").textContent =
+                    "Timetable session saved successfully.";
+            }
+        });
+
+        document.getElementById("schedule-cancel-button")
+            .addEventListener("click", resetScheduleForm);
+
+        renderTasks();
+        renderSchedule();
+    </script>
+</body>
+</html>
